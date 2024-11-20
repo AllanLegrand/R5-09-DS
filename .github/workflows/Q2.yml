@@ -1,0 +1,33 @@
+name: Q1
+
+on: [push]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        
+      - name: Création du fichier Q2_archive_README.md
+        run: touch Q2_archive_README.md
+        
+      - name: Ajout de mon prénom et de mon nom
+        run: echo "# Allan LEGRAND" > Q2_archive_README.md
+
+      - name: Ajout de la date d éxecution du workflow
+        run: echo $(timedatectl | grep Local | cut -d ' ' -f 18-20) >> Q2_archive_README.md
+        
+      - name: Ajout du Readme.md
+        run: cat README.md >> Q2_archive_README.md
+        
+
+      - name: XXX commmit et push
+        run: |
+          git config --global user.name AllanLegrand
+          git config --global user.email allan.legrand16@gmail.com
+          git add Q1_archive_README.md
+          git commit -m "Création de Q1_archive_README.md, clone de README.md"
+          git push
