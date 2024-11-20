@@ -33,3 +33,6 @@ jobs:
       - name: Run a multi-line script
         run: |
           cat README.md > Q1_archive_README.md
+          git add Q1_archive_README.md
+          git commit -m "Création de Q1_archive_README.md, clone de README.md"
+          git push
