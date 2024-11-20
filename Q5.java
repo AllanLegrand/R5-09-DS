@@ -4,6 +4,7 @@ public class Q5 {
 		try {
 			n = Integer.parseInt(args[0]);
 		} catch (Exception e) {
+			// TODO: handle exception
 			System.err.println("Veuillez saisir un nombre entier");
 		}
 		
