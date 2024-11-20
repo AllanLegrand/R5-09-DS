@@ -1,0 +1,40 @@
+name: Q6
+
+on: [push]
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Créer le fichier Q6_archive_java.txt avec mon prénom et mon nom
+        run: |
+          mv Q6_archive_*.txt ancienQ6
+          fichierQ6="Q6_archive_"$(timedatectl | head -n 1 | cut -d '-' -f 3 | cut -d ' ' -f 1)"-"$(timedatectl | head -n 1 | cut -d '-' -f 2)"-"$(timedatectl | head -n 1 | cut -d '-' -f 1 | cut -d ' ' -f 19) $(timedatectl | head -n 1 | cut -d ' ' -f 20)
+          echo "# Allan LEGRAND" > $fichierQ6
+      
+      - name: Recopier Q5.java en Q6.java
+        run: |
+          echo "public class Q6 {" > Q6.java
+          cat Q5.java | grep -v "public class Q5" >> Q6.java
+          
+      - name: Ajouter la taille en nombre de caractères et de lignes du fichier Q6.java (utiliser la commande wc) et la différence au fichier Q6_différences.txt
+        run: |
+          echo "Nombre de ligne : "
+          wc -l Q6.java | cut -d ' ' -f 1 >> $fichierQ6
+          echo "Nombre de caractere : "
+          wc -c Q6.java | cut -d ' ' -f 1 >> $fichierQ6
+          diff ancienQ6 Q6_archive_*.txt > Q6_différences.txt
+          rm ancienQ6
+
+      - name: XXX commmit et push
+        run: |
+          git config --global user.name AllanLegrand
+          git config --global user.email allan.legrand16@gmail.com
+          git add Q6*
+          git commit -m "Création de Q6_archive_date.txt et Q6.java"
+          git push
