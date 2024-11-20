@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        
       - name: Création du fichier Q1_archive_README.md
         run: cat README.md > Q1_archive_README.md
 
