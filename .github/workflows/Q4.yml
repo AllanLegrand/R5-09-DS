@@ -1,0 +1,45 @@
+name: Q4
+
+on: [push]
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Créer le fichier Q4_archive_java.txt avec mon prénom et mon nom
+        run: echo "# Allan LEGRAND" > "Q4_"$(timedatectl | head -n 1 | cut -d '-' -f 3 | cut -d ' ' -f 1)"-"$(timedatectl | head -n 1 | cut -d '-' -f 2)"-"$(timedatectl | head -n 1 | cut -d '-' -f 1 | cut -d ' ' -f 19)".txt"
+        
+      - name: Créer le fichier Q4.java
+        run: |
+          cat <<EOF > Q4.java
+          public class Q4 {
+          	public static void main(String[] args) {
+          		try {
+          			int n = Integer.parseInt(args[0]);
+          		} catch (Exception e) {
+          			// TODO: handle exception
+          			System.err.println("Veuillez saisir un nombre entier");
+          		}
+          		
+          		for(int i = 0; i < n; i++) {
+          			for(int j = 0; j < n; j++) {
+          				System.out.print("*");
+          			}
+          			System.out.println();
+          		}
+          	}
+          }
+
+      
+      - name: XXX commmit et push
+        run: |
+          git config --global user.name AllanLegrand
+          git config --global user.email allan.legrand16@gmail.com
+          git add Q4*
+          git commit -m "Création de Q4_archive_date.txt et Q4.java"
+          git push
