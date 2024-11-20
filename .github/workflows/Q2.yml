@@ -27,6 +27,6 @@ jobs:
         run: |
           git config --global user.name AllanLegrand
           git config --global user.email allan.legrand16@gmail.com
-          git add Q1_archive_README.md
-          git commit -m "Création de Q1_archive_README.md, clone de README.md"
+          git add Q2_archive_README.md
+          git commit -m "Création de Q2_archive_README.md"
           git push
