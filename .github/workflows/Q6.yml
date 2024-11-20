@@ -13,6 +13,7 @@ jobs:
       
       - name: Créer le fichier Q6_archive_java.txt avec mon prénom et mon nom
         run: |
+          mv Q6_archive_*.txt ancienQ6 2>/dev/null
           fichierQ6="Q6_archive_"$(timedatectl | head -n 1 | cut -d '-' -f 3 | cut -d ' ' -f 1)"-"$(timedatectl | head -n 1 | cut -d '-' -f 2)"-"$(timedatectl | head -n 1 | cut -d '-' -f 1 | cut -d ' ' -f 19) $(timedatectl | head -n 1 | cut -d ' ' -f 20)
           echo "# Allan LEGRAND" > $fichierQ6
       
