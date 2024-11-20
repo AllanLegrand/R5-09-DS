@@ -1,0 +1,42 @@
+name: Q3
+
+on: [push]
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Créer le fichier Q3_archive_java.txt avec mon prénom et mon nom
+        run: echo "# Allan LEGRAND" > Q3_archive_java.txt
+        
+      - name: Créer le fichier Q3.java
+        run: |
+          cat <<EOF > Q3.java
+          public class Q3 {
+          	public static void main(String[] args) {
+          		try {
+          			int n = Integer.parseInt(args[0]);
+          		} catch (Exception e) {
+          			// TODO: handle exception
+          			System.err.println("Veuillez saisir un nombre entier");
+          		}
+          		
+          		for(int i = 0; i < n; i++) {
+          			System.out.print("*");
+          		}
+          	}
+          }
+      
+      - name: XXX commmit et push
+        run: |
+          git config --global user.name AllanLegrand
+          git config --global user.email allan.legrand16@gmail.com
+          git add Q3.java
+          git add Q3_archive_java.txt
+          git commit -m "Création de Q3_archive_java.txt et Q3.java"
+          git push
